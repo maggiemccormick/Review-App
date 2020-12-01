@@ -2,16 +2,52 @@ import 'package:best_flutter_ui_templates/design_course/category_list_view.dart'
 import 'package:best_flutter_ui_templates/design_course/course_info_screen.dart';
 import 'package:best_flutter_ui_templates/design_course/popular_course_list_view.dart';
 import 'package:best_flutter_ui_templates/main.dart';
+import 'package:best_flutter_ui_templates/review_app/bottom_navigation_view/bottom_bar_view.dart';
+import 'package:best_flutter_ui_templates/review_app/my_diary/my_diary_screen.dart';
+import 'package:best_flutter_ui_templates/review_app/traning/training_screen.dart';
 import 'package:flutter/material.dart';
+
 import 'design_course_app_theme.dart';
+import 'models/tabIcon_data.dart';
 
 class DesignCourseHomeScreen extends StatefulWidget {
+  const DesignCourseHomeScreen({Key key, this.animationController}) : super(key: key);
+
+  final AnimationController animationController;
   @override
   _DesignCourseHomeScreenState createState() => _DesignCourseHomeScreenState();
 }
 
-class _DesignCourseHomeScreenState extends State<DesignCourseHomeScreen> {
+class _DesignCourseHomeScreenState extends State<DesignCourseHomeScreen>
+    with TickerProviderStateMixin {
   CategoryType categoryType = CategoryType.ui;
+
+  AnimationController animationController;
+
+  List<TabIconData> tabIconsList = TabIconData.tabIconsList;
+
+  Widget tabBody = Container(
+    color: DesignCourseAppTheme.dismissibleBackground,
+  );
+
+  @override
+  void initState() {
+    tabIconsList.forEach((TabIconData tab) {
+      tab.isSelected = false;
+    });
+    tabIconsList[0].isSelected = true;
+
+    animationController =
+        AnimationController(duration: const Duration(milliseconds: 600), vsync: this);
+    tabBody = MyDiaryScreen(animationController: animationController);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    animationController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -76,13 +112,11 @@ class _DesignCourseHomeScreenState extends State<DesignCourseHomeScreen> {
               const SizedBox(
                 width: 16,
               ),
-              getButtonUI(
-                  CategoryType.coding, categoryType == CategoryType.coding),
+              getButtonUI(CategoryType.coding, categoryType == CategoryType.coding),
               const SizedBox(
                 width: 16,
               ),
-              getButtonUI(
-                  CategoryType.basic, categoryType == CategoryType.basic),
+              getButtonUI(CategoryType.basic, categoryType == CategoryType.basic),
             ],
           ),
         ),
@@ -148,9 +182,7 @@ class _DesignCourseHomeScreenState extends State<DesignCourseHomeScreen> {
     return Expanded(
       child: Container(
         decoration: BoxDecoration(
-            color: isSelected
-                ? DesignCourseAppTheme.nearlyBlue
-                : DesignCourseAppTheme.nearlyWhite,
+            color: isSelected ? DesignCourseAppTheme.nearlyBlue : DesignCourseAppTheme.nearlyWhite,
             borderRadius: const BorderRadius.all(Radius.circular(24.0)),
             border: Border.all(color: DesignCourseAppTheme.nearlyBlue)),
         child: Material(
@@ -164,8 +196,7 @@ class _DesignCourseHomeScreenState extends State<DesignCourseHomeScreen> {
               });
             },
             child: Padding(
-              padding: const EdgeInsets.only(
-                  top: 12, bottom: 12, left: 18, right: 18),
+              padding: const EdgeInsets.only(top: 12, bottom: 12, left: 18, right: 18),
               child: Center(
                 child: Text(
                   txt,
@@ -299,6 +330,41 @@ class _DesignCourseHomeScreenState extends State<DesignCourseHomeScreen> {
           )
         ],
       ),
+    );
+  }
+
+  Widget bottomBar() {
+    return Column(
+      children: <Widget>[
+        const Expanded(
+          child: SizedBox(),
+        ),
+        BottomBarView(
+          tabIconsList: tabIconsList,
+          addClick: () {},
+          changeIndex: (int index) {
+            if (index == 0 || index == 2) {
+              animationController.reverse().then<dynamic>((data) {
+                if (!mounted) {
+                  return;
+                }
+                setState(() {
+                  tabBody = MyDiaryScreen(animationController: animationController);
+                });
+              });
+            } else if (index == 1 || index == 3) {
+              animationController.reverse().then<dynamic>((data) {
+                if (!mounted) {
+                  return;
+                }
+                setState(() {
+                  tabBody = TrainingScreen(animationController: animationController);
+                });
+              });
+            }
+          },
+        ),
+      ],
     );
   }
 }

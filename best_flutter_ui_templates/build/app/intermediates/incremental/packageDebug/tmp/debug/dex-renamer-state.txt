@@ -1,4 +1,0 @@
-#Mon Nov 30 17:50:27 PST 2020
-base.0=C\:\\Users\\Maggie\\vs-code\\review-app\\Best-Flutter-UI-Templates\\best_flutter_ui_templates\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\out\\classes.dex
-path.0=classes.dex
-renamed.0=classes.dex
