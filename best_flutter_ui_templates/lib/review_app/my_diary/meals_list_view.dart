@@ -1,8 +1,8 @@
+import 'package:best_flutter_ui_templates/design_course/models/meals_list_data.dart';
 import 'package:best_flutter_ui_templates/fitness_app/fintness_app_theme.dart';
 import 'package:best_flutter_ui_templates/main.dart';
 import 'package:flutter/material.dart';
 
-import 'file:///D:/Software%20Development/App%20Dev/Flutter/Review-App/best_flutter_ui_templates/lib/design_course/models/meals_list_data.dart';
 
 import '../../main.dart';
 
