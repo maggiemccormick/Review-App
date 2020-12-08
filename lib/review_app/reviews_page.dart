@@ -1,9 +1,9 @@
-import 'package:Redlands_Strong/design_course/category_list_view.dart';
+import 'package:Redlands_Strong/review_app/reviews_list_view.dart';
 import 'package:Redlands_Strong/design_course/course_info_screen.dart';
-import 'package:Redlands_Strong/design_course/popular_course_list_view.dart';
 import 'package:Redlands_Strong/main.dart';
 import 'package:Redlands_Strong/review_app/bottom_navigation_view/bottom_bar_view.dart';
 import 'package:Redlands_Strong/review_app/my_diary/my_diary_screen.dart';
+import 'package:Redlands_Strong/review_app/popular_reviews_list_view.dart';
 import 'package:Redlands_Strong/review_app/training/training_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -68,10 +68,9 @@ class _ReviewsPageState extends State<ReviewsPage>
                   child: Column(
                     children: <Widget>[
                       getSearchBarUI(),
-                      getCategoryUI(),
-                      Flexible(
-                        child: getPopularCourseUI(),
-                      ),
+                      getCategoryUI("Movie Theaters"),
+                      getCategoryUI("Restaurants"),
+                      getCategoryUI("Bars"),
                     ],
                   ),
                 ),
@@ -83,7 +82,7 @@ class _ReviewsPageState extends State<ReviewsPage>
     );
   }
 
-  Widget getCategoryUI() {
+  Widget getCategoryUI(String categoryName) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -91,7 +90,7 @@ class _ReviewsPageState extends State<ReviewsPage>
         Padding(
           padding: const EdgeInsets.only(top: 8.0, left: 18, right: 16),
           child: Text(
-            'Category',
+            categoryName,
             textAlign: TextAlign.left,
             style: TextStyle(
               fontWeight: FontWeight.w600,
@@ -101,29 +100,7 @@ class _ReviewsPageState extends State<ReviewsPage>
             ),
           ),
         ),
-        const SizedBox(
-          height: 16,
-        ),
-        Padding(
-          padding: const EdgeInsets.only(left: 16, right: 16),
-          child: Row(
-            children: <Widget>[
-              getButtonUI(CategoryType.ui, categoryType == CategoryType.ui),
-              const SizedBox(
-                width: 16,
-              ),
-              getButtonUI(CategoryType.coding, categoryType == CategoryType.coding),
-              const SizedBox(
-                width: 16,
-              ),
-              getButtonUI(CategoryType.basic, categoryType == CategoryType.basic),
-            ],
-          ),
-        ),
-        const SizedBox(
-          height: 16,
-        ),
-        CategoryListView(
+        ReviewsListView(
           callBack: () {
             moveTo();
           },
@@ -140,7 +117,7 @@ class _ReviewsPageState extends State<ReviewsPage>
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
-            'Popular Course',
+            'Popular Reviews',
             textAlign: TextAlign.left,
             style: TextStyle(
               fontWeight: FontWeight.w600,
@@ -150,7 +127,7 @@ class _ReviewsPageState extends State<ReviewsPage>
             ),
           ),
           Flexible(
-            child: PopularCourseListView(
+            child: PopularReviewsListView(
               callBack: () {
                 moveTo();
               },
@@ -166,54 +143,6 @@ class _ReviewsPageState extends State<ReviewsPage>
       context,
       MaterialPageRoute<dynamic>(
         builder: (BuildContext context) => CourseInfoScreen(),
-      ),
-    );
-  }
-
-  Widget getButtonUI(CategoryType categoryTypeData, bool isSelected) {
-    String txt = '';
-    if (CategoryType.ui == categoryTypeData) {
-      txt = 'Ui/Ux';
-    } else if (CategoryType.coding == categoryTypeData) {
-      txt = 'Coding';
-    } else if (CategoryType.basic == categoryTypeData) {
-      txt = 'Basic UI';
-    }
-    return Expanded(
-      child: Container(
-        decoration: BoxDecoration(
-            color: isSelected ? DesignCourseAppTheme.nearlyBlue : DesignCourseAppTheme.nearlyWhite,
-            borderRadius: const BorderRadius.all(Radius.circular(24.0)),
-            border: Border.all(color: DesignCourseAppTheme.nearlyBlue)),
-        child: Material(
-          color: Colors.transparent,
-          child: InkWell(
-            splashColor: Colors.white24,
-            borderRadius: const BorderRadius.all(Radius.circular(24.0)),
-            onTap: () {
-              setState(() {
-                categoryType = categoryTypeData;
-              });
-            },
-            child: Padding(
-              padding: const EdgeInsets.only(top: 12, bottom: 12, left: 18, right: 18),
-              child: Center(
-                child: Text(
-                  txt,
-                  textAlign: TextAlign.left,
-                  style: TextStyle(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 12,
-                    letterSpacing: 0.27,
-                    color: isSelected
-                        ? DesignCourseAppTheme.nearlyWhite
-                        : DesignCourseAppTheme.nearlyBlue,
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ),
       ),
     );
   }
@@ -301,7 +230,7 @@ class _ReviewsPageState extends State<ReviewsPage>
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
-                  'Choose your',
+                  'Welcome to',
                   textAlign: TextAlign.left,
                   style: TextStyle(
                     fontWeight: FontWeight.w400,
@@ -311,7 +240,7 @@ class _ReviewsPageState extends State<ReviewsPage>
                   ),
                 ),
                 Text(
-                  'Design Course',
+                  'Redlands Strong',
                   textAlign: TextAlign.left,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
@@ -326,7 +255,7 @@ class _ReviewsPageState extends State<ReviewsPage>
           Container(
             width: 60,
             height: 60,
-            child: Image.asset('assets/design_course/userImage.png'),
+            child: Image.asset('assets/review_app/redlands_strong_icon_temp.png'),
           )
         ],
       ),
