@@ -1,4 +1,4 @@
-package com.example.Redlands_Strong
+package com.redlandsstrong.app
 
 import io.flutter.embedding.android.FlutterActivity
 
