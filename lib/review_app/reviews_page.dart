@@ -8,7 +8,7 @@ import 'package:Redlands_Strong/review_app/traning/training_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'design_course_app_theme.dart';
-import 'package:Redlands_Strong/review_app/models/tabIcon_data.dart';
+import 'models/tabIcon_data.dart';
 
 class DesignCourseHomeScreen extends StatefulWidget {
   const DesignCourseHomeScreen({Key key, this.animationController}) : super(key: key);

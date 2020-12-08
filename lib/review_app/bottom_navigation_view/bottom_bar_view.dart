@@ -1,6 +1,6 @@
 import 'dart:math' as math;
 
-import 'package:Redlands_Strong/design_course/models/tabIcon_data.dart';
+import 'package:Redlands_Strong/review_app/models/tabIcon_data.dart';
 import 'package:Redlands_Strong/fitness_app/fintness_app_theme.dart';
 import 'package:Redlands_Strong/main.dart';
 import 'package:flutter/material.dart';

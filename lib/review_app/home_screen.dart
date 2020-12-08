@@ -1,8 +1,8 @@
-import 'package:Redlands_Strong/design_course/models/tabIcon_data.dart';
+import 'package:Redlands_Strong/review_app/models/tabIcon_data.dart';
 import 'package:Redlands_Strong/fitness_app/traning/training_screen.dart';
 import 'package:flutter/material.dart';
 
-import '../design_course/home_design_course.dart';
+import '../review_app/reviews_page.dart';
 import 'bottom_navigation_view/bottom_bar_view.dart';
 import 'fintness_app_theme.dart';
 
