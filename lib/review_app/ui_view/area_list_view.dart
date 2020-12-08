@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../fintness_app_theme.dart';
+import '../review_app_theme.dart';
 
 class AreaListView extends StatefulWidget {
   const AreaListView(
@@ -115,7 +115,7 @@ class AreaView extends StatelessWidget {
                 0.0, 50 * (1.0 - animation.value), 0.0),
             child: Container(
               decoration: BoxDecoration(
-                color: FitnessAppTheme.white,
+                color: ReviewAppTheme.white,
                 borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(8.0),
                     bottomLeft: Radius.circular(8.0),
@@ -123,7 +123,7 @@ class AreaView extends StatelessWidget {
                     topRight: Radius.circular(8.0)),
                 boxShadow: <BoxShadow>[
                   BoxShadow(
-                      color: FitnessAppTheme.grey.withOpacity(0.4),
+                      color: ReviewAppTheme.grey.withOpacity(0.4),
                       offset: const Offset(1.1, 1.1),
                       blurRadius: 10.0),
                 ],
@@ -135,7 +135,7 @@ class AreaView extends StatelessWidget {
                   highlightColor: Colors.transparent,
                   hoverColor: Colors.transparent,
                   borderRadius: const BorderRadius.all(Radius.circular(8.0)),
-                  splashColor: FitnessAppTheme.nearlyDarkBlue.withOpacity(0.2),
+                  splashColor: ReviewAppTheme.nearlyDarkBlue.withOpacity(0.2),
                   onTap: () {},
                   child: Column(
                     children: <Widget>[

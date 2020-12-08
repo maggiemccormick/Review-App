@@ -4,21 +4,21 @@ import 'package:Redlands_Strong/design_course/popular_course_list_view.dart';
 import 'package:Redlands_Strong/main.dart';
 import 'package:Redlands_Strong/review_app/bottom_navigation_view/bottom_bar_view.dart';
 import 'package:Redlands_Strong/review_app/my_diary/my_diary_screen.dart';
-import 'package:Redlands_Strong/review_app/traning/training_screen.dart';
+import 'package:Redlands_Strong/review_app/training/training_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'design_course_app_theme.dart';
 import 'models/tabIcon_data.dart';
 
-class DesignCourseHomeScreen extends StatefulWidget {
-  const DesignCourseHomeScreen({Key key, this.animationController}) : super(key: key);
+class ReviewsPage extends StatefulWidget {
+  const ReviewsPage({Key key, this.animationController}) : super(key: key);
 
   final AnimationController animationController;
   @override
-  _DesignCourseHomeScreenState createState() => _DesignCourseHomeScreenState();
+  _ReviewsPageState createState() => _ReviewsPageState();
 }
 
-class _DesignCourseHomeScreenState extends State<DesignCourseHomeScreen>
+class _ReviewsPageState extends State<ReviewsPage>
     with TickerProviderStateMixin {
   CategoryType categoryType = CategoryType.ui;
 

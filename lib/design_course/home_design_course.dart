@@ -4,7 +4,7 @@ import 'package:Redlands_Strong/design_course/popular_course_list_view.dart';
 import 'package:Redlands_Strong/main.dart';
 import 'package:Redlands_Strong/review_app/bottom_navigation_view/bottom_bar_view.dart';
 import 'package:Redlands_Strong/review_app/my_diary/my_diary_screen.dart';
-import 'package:Redlands_Strong/review_app/traning/training_screen.dart';
+import 'package:Redlands_Strong/review_app/training/training_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'design_course_app_theme.dart';
