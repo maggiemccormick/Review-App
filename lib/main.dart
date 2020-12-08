@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:Redlands_Strong/app_theme.dart';
-import 'package:Redlands_Strong/review_app/fitness_app_home_screen.dart';
+import 'package:Redlands_Strong/review_app/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
         textTheme: AppTheme.textTheme,
         platform: TargetPlatform.iOS,
       ),
-      home: FitnessAppHomeScreen(),
+      home: HomeScreen(),
     );
   }
 }

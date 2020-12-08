@@ -1,5 +1,5 @@
 import 'package:Redlands_Strong/design_course/home_design_course.dart';
-import 'package:Redlands_Strong/fitness_app/fitness_app_home_screen.dart';
+import 'package:Redlands_Strong/fitness_app/home_screen.dart';
 import 'package:Redlands_Strong/hotel_booking/hotel_home_screen.dart';
 import 'package:flutter/widgets.dart';
 
