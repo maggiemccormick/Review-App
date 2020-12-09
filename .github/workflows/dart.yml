@@ -28,12 +28,10 @@ jobs:
         java-version: '12.x'
 
     - run: flutter pub get
-      working-directory: Redlands_Strong
     # - run: flutter test
 
     - name: build APK
       run: flutter build apk
-      working-directory: Redlands_Strong
 
     - name: upload APK
       uses: actions/upload-artifact@v1
