@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "683298017898",
+    "project_id": "redlands-strong",
+    "storage_bucket": "redlands-strong.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:683298017898:android:986c3b9a71cd4960db3013",
+        "android_client_info": {
+          "package_name": "com.redlandsstrong.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "683298017898-k4p9kknqtnph0sp8ihors821v9orl94v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCdzeL9VqJH2PyUtVbmlqc8Q7trq8PZvVY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "683298017898-k4p9kknqtnph0sp8ihors821v9orl94v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
