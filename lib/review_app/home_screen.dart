@@ -1,5 +1,5 @@
 import 'package:Redlands_Strong/review_app/models/tabIcon_data.dart';
-import 'package:Redlands_Strong/fitness_app/traning/training_screen.dart';
+import 'package:Redlands_Strong/review_app/profile_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../review_app/reviews_page.dart';
@@ -94,7 +94,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   return;
                 }
                 setState(() {
-                  tabBody = TrainingScreen(animationController: animationController);
+                  tabBody = ProfilePage(animationController: animationController);
                 });
               });
             }

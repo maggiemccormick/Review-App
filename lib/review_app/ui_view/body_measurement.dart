@@ -1,12 +1,12 @@
-import 'package:Redlands_Strong/fitness_app/fintness_app_theme.dart';
 import 'package:flutter/material.dart';
+
+import 'file:///D:/Software%20Development/App%20Dev/Flutter/Redlands_Strong/lib/review_app/fintness_app_theme.dart';
 
 class BodyMeasurementView extends StatelessWidget {
   final AnimationController animationController;
   final Animation animation;
 
-  const BodyMeasurementView({Key key, this.animationController, this.animation})
-      : super(key: key);
+  const BodyMeasurementView({Key key, this.animationController, this.animation}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,11 +16,9 @@ class BodyMeasurementView extends StatelessWidget {
         return FadeTransition(
           opacity: animation,
           child: new Transform(
-            transform: new Matrix4.translationValues(
-                0.0, 30 * (1.0 - animation.value), 0.0),
+            transform: new Matrix4.translationValues(0.0, 30 * (1.0 - animation.value), 0.0),
             child: Padding(
-              padding: const EdgeInsets.only(
-                  left: 24, right: 24, top: 16, bottom: 18),
+              padding: const EdgeInsets.only(left: 24, right: 24, top: 16, bottom: 18),
               child: Container(
                 decoration: BoxDecoration(
                   color: FitnessAppTheme.white,
@@ -39,15 +37,13 @@ class BodyMeasurementView extends StatelessWidget {
                 child: Column(
                   children: <Widget>[
                     Padding(
-                      padding:
-                          const EdgeInsets.only(top: 16, left: 16, right: 24),
+                      padding: const EdgeInsets.only(top: 16, left: 16, right: 24),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Padding(
-                            padding: const EdgeInsets.only(
-                                left: 4, bottom: 8, top: 16),
+                            padding: const EdgeInsets.only(left: 4, bottom: 8, top: 16),
                             child: Text(
                               'Weight',
                               textAlign: TextAlign.center,
@@ -68,8 +64,7 @@ class BodyMeasurementView extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: <Widget>[
                                   Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 4, bottom: 3),
+                                    padding: const EdgeInsets.only(left: 4, bottom: 3),
                                     child: Text(
                                       '206.8',
                                       textAlign: TextAlign.center,
@@ -82,8 +77,7 @@ class BodyMeasurementView extends StatelessWidget {
                                     ),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 8, bottom: 8),
+                                    padding: const EdgeInsets.only(left: 8, bottom: 8),
                                     child: Text(
                                       'Ibs',
                                       textAlign: TextAlign.center,
@@ -107,32 +101,27 @@ class BodyMeasurementView extends StatelessWidget {
                                     children: <Widget>[
                                       Icon(
                                         Icons.access_time,
-                                        color: FitnessAppTheme.grey
-                                            .withOpacity(0.5),
+                                        color: FitnessAppTheme.grey.withOpacity(0.5),
                                         size: 16,
                                       ),
                                       Padding(
-                                        padding:
-                                            const EdgeInsets.only(left: 4.0),
+                                        padding: const EdgeInsets.only(left: 4.0),
                                         child: Text(
                                           'Today 8:26 AM',
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
-                                            fontFamily:
-                                                FitnessAppTheme.fontName,
+                                            fontFamily: FitnessAppTheme.fontName,
                                             fontWeight: FontWeight.w500,
                                             fontSize: 14,
                                             letterSpacing: 0.0,
-                                            color: FitnessAppTheme.grey
-                                                .withOpacity(0.5),
+                                            color: FitnessAppTheme.grey.withOpacity(0.5),
                                           ),
                                         ),
                                       ),
                                     ],
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.only(
-                                        top: 4, bottom: 14),
+                                    padding: const EdgeInsets.only(top: 4, bottom: 14),
                                     child: Text(
                                       'InBody SmartScale',
                                       textAlign: TextAlign.center,
@@ -153,8 +142,7 @@ class BodyMeasurementView extends StatelessWidget {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(
-                          left: 24, right: 24, top: 8, bottom: 8),
+                      padding: const EdgeInsets.only(left: 24, right: 24, top: 8, bottom: 8),
                       child: Container(
                         height: 2,
                         decoration: BoxDecoration(
@@ -164,8 +152,7 @@ class BodyMeasurementView extends StatelessWidget {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(
-                          left: 24, right: 24, top: 8, bottom: 16),
+                      padding: const EdgeInsets.only(left: 24, right: 24, top: 8, bottom: 16),
                       child: Row(
                         children: <Widget>[
                           Expanded(
@@ -193,8 +180,7 @@ class BodyMeasurementView extends StatelessWidget {
                                       fontFamily: FitnessAppTheme.fontName,
                                       fontWeight: FontWeight.w600,
                                       fontSize: 12,
-                                      color:
-                                          FitnessAppTheme.grey.withOpacity(0.5),
+                                      color: FitnessAppTheme.grey.withOpacity(0.5),
                                     ),
                                   ),
                                 ),
@@ -230,8 +216,7 @@ class BodyMeasurementView extends StatelessWidget {
                                           fontFamily: FitnessAppTheme.fontName,
                                           fontWeight: FontWeight.w600,
                                           fontSize: 12,
-                                          color: FitnessAppTheme.grey
-                                              .withOpacity(0.5),
+                                          color: FitnessAppTheme.grey.withOpacity(0.5),
                                         ),
                                       ),
                                     ),
@@ -268,8 +253,7 @@ class BodyMeasurementView extends StatelessWidget {
                                           fontFamily: FitnessAppTheme.fontName,
                                           fontWeight: FontWeight.w600,
                                           fontSize: 12,
-                                          color: FitnessAppTheme.grey
-                                              .withOpacity(0.5),
+                                          color: FitnessAppTheme.grey.withOpacity(0.5),
                                         ),
                                       ),
                                     ),

@@ -1,12 +1,10 @@
-import 'package:Redlands_Strong/review_app/reviews_list_view.dart';
-import 'package:Redlands_Strong/design_course/course_info_screen.dart';
 import 'package:Redlands_Strong/main.dart';
 import 'package:Redlands_Strong/review_app/bottom_navigation_view/bottom_bar_view.dart';
-import 'package:Redlands_Strong/review_app/my_diary/my_diary_screen.dart';
-import 'package:Redlands_Strong/review_app/popular_reviews_list_view.dart';
-import 'package:Redlands_Strong/review_app/training/training_screen.dart';
+import 'package:Redlands_Strong/review_app/profile_screen.dart';
+import 'package:Redlands_Strong/review_app/reviews_list_view.dart';
 import 'package:flutter/material.dart';
 
+import 'course_info_screen.dart';
 import 'design_course_app_theme.dart';
 import 'models/tabIcon_data.dart';
 
@@ -18,8 +16,7 @@ class ReviewsPage extends StatefulWidget {
   _ReviewsPageState createState() => _ReviewsPageState();
 }
 
-class _ReviewsPageState extends State<ReviewsPage>
-    with TickerProviderStateMixin {
+class _ReviewsPageState extends State<ReviewsPage> with TickerProviderStateMixin {
   CategoryType categoryType = CategoryType.ui;
 
   AnimationController animationController;
@@ -39,7 +36,7 @@ class _ReviewsPageState extends State<ReviewsPage>
 
     animationController =
         AnimationController(duration: const Duration(milliseconds: 600), vsync: this);
-    tabBody = MyDiaryScreen(animationController: animationController);
+    tabBody = ProfilePage(animationController: animationController);
     super.initState();
   }
 
@@ -106,35 +103,6 @@ class _ReviewsPageState extends State<ReviewsPage>
           },
         ),
       ],
-    );
-  }
-
-  Widget getPopularCourseUI() {
-    return Padding(
-      padding: const EdgeInsets.only(top: 8.0, left: 18, right: 16),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Text(
-            'Popular Reviews',
-            textAlign: TextAlign.left,
-            style: TextStyle(
-              fontWeight: FontWeight.w600,
-              fontSize: 22,
-              letterSpacing: 0.27,
-              color: DesignCourseAppTheme.darkerText,
-            ),
-          ),
-          Flexible(
-            child: PopularReviewsListView(
-              callBack: () {
-                moveTo();
-              },
-            ),
-          )
-        ],
-      ),
     );
   }
 
@@ -278,7 +246,7 @@ class _ReviewsPageState extends State<ReviewsPage>
                   return;
                 }
                 setState(() {
-                  tabBody = MyDiaryScreen(animationController: animationController);
+                  tabBody = ProfilePage(animationController: animationController);
                 });
               });
             } else if (index == 1 || index == 3) {
@@ -287,7 +255,7 @@ class _ReviewsPageState extends State<ReviewsPage>
                   return;
                 }
                 setState(() {
-                  tabBody = TrainingScreen(animationController: animationController);
+                  tabBody = ProfilePage(animationController: animationController);
                 });
               });
             }

@@ -1,15 +1,17 @@
+// this class acts as the data model for all of the reviews
+
 class Review {
   Review({
     this.title = '',
     this.imagePath = '',
-    this.lessonCount = 0,
-    this.money = 0,
+    this.numReviews = 0,
+    this.money = '\$',
     this.rating = 0.0,
   });
 
   String title;
-  int lessonCount;
-  int money;
+  int numReviews;
+  String money;
   double rating;
   String imagePath;
 
@@ -17,29 +19,29 @@ class Review {
     Review(
       imagePath: 'assets/design_course/interFace1.png',
       title: 'User interface Design',
-      lessonCount: 24,
-      money: 25,
+      numReviews: 24,
+      money: '\$\$',
       rating: 4.3,
     ),
     Review(
       imagePath: 'assets/design_course/interFace2.png',
       title: 'User interface Design',
-      lessonCount: 22,
-      money: 18,
+      numReviews: 22,
+      money: '\$\$',
       rating: 4.6,
     ),
     Review(
       imagePath: 'assets/design_course/interFace1.png',
       title: 'User interface Design',
-      lessonCount: 24,
-      money: 25,
+      numReviews: 24,
+      money: '\$\$',
       rating: 4.3,
     ),
     Review(
       imagePath: 'assets/design_course/interFace2.png',
       title: 'User interface Design',
-      lessonCount: 22,
-      money: 18,
+      numReviews: 22,
+      money: '\$\$',
       rating: 4.6,
     ),
   ];
@@ -48,29 +50,29 @@ class Review {
     Review(
       imagePath: 'assets/design_course/interFace3.png',
       title: 'App Design Course',
-      lessonCount: 12,
-      money: 25,
+      numReviews: 12,
+      money: '\$\$',
       rating: 4.8,
     ),
     Review(
       imagePath: 'assets/design_course/interFace4.png',
       title: 'Web Design Course',
-      lessonCount: 28,
-      money: 208,
+      numReviews: 28,
+      money: '\$\$',
       rating: 4.9,
     ),
     Review(
       imagePath: 'assets/design_course/interFace3.png',
       title: 'App Design Course',
-      lessonCount: 12,
-      money: 25,
+      numReviews: 12,
+      money: '\$\$',
       rating: 4.8,
     ),
     Review(
       imagePath: 'assets/design_course/interFace4.png',
       title: 'Web Design Course',
-      lessonCount: 28,
-      money: 208,
+      numReviews: 28,
+      money: '\$\$',
       rating: 4.9,
     ),
   ];
