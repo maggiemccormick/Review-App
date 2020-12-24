@@ -4,6 +4,7 @@ import 'package:Redlands_Strong/shared/shared.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -75,6 +76,7 @@ class ProfileScreenState extends State<ProfileScreen> with TickerProviderStateMi
                     children: <Widget>[
                       Text("logged In"),
                       Text(user.displayName ?? 'Guest'),
+                      logoutButton(),
                     ],
                   ),
                 ),
@@ -102,12 +104,37 @@ class ProfileScreenState extends State<ProfileScreen> with TickerProviderStateMi
                 child: Container(
                   height: MediaQuery.of(context).size.height,
                   child: Column(
-                    children: <Widget>[Text("Logged Out")],
+                    children: <Widget>[
+                      Text("Logged Out"),
+                      LoginButton(
+                        text: 'LOGIN WITH GOOGLE',
+                        icon: FontAwesomeIcons.google,
+                        color: Colors.black45,
+                        loginMethod: auth.googleSignIn,
+                      ),
+                    ],
                   ),
                 ),
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget logoutButton() {
+    return Container(
+      margin: EdgeInsets.only(bottom: 10),
+      child: FlatButton.icon(
+        padding: EdgeInsets.all(30),
+        icon: Icon(FontAwesomeIcons.signOutAlt, color: Colors.white),
+        color: Colors.black45,
+        onPressed: () async {
+          await auth.signOut();
+        },
+        label: Expanded(
+          child: Text('Sign Out', textAlign: TextAlign.center),
         ),
       ),
     );

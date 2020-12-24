@@ -32,9 +32,9 @@ class AuthService {
 
       // Update user data in firestore
       updateUserData(user);
-
       return user;
     } catch (error) {
+      print("There was an error logging in");
       print(error);
       return null;
     }
