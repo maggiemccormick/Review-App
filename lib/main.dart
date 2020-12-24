@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import 'package:Redlands_Strong/app_theme.dart';
-import 'package:Redlands_Strong/review_app/home_screen.dart';
+import 'package:Redlands_Strong/screens/screens.dart';
+import 'package:Redlands_Strong/shared/shared.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
