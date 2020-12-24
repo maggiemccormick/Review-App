@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "683298017898-emkee6m0f3ko85o29hrlcbstjeusvcfa.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.redlandsstrong.app",
+            "certificate_hash": "3b829cbaa0ddcd06da5990eb2e4dfbcf1746ba3f"
+          }
+        },
+        {
           "client_id": "683298017898-k4p9kknqtnph0sp8ihors821v9orl94v.apps.googleusercontent.com",
           "client_type": 3
         }

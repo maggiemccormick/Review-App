@@ -1,10 +1,10 @@
-import 'package:Redlands_Strong/screens/reviews_screen.dart';
-import 'package:Redlands_Strong/services/models/tabIcon_data.dart';
+import 'package:Redlands_Strong/screens/screens.dart';
+import 'package:Redlands_Strong/services/services.dart';
+import 'package:Redlands_Strong/shared/shared.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import '../shared/bottom_bar_view.dart';
-import '../shared/themes/design_course_app_theme.dart';
+import 'package:provider/provider.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key key, this.animationController}) : super(key: key);
@@ -14,6 +14,7 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class ProfileScreenState extends State<ProfileScreen> with TickerProviderStateMixin {
+  final AuthService auth = AuthService();
   AnimationController animationController;
 
   List<TabIconData> tabIconsList = TabIconData.tabIconsList;
@@ -45,6 +46,17 @@ class ProfileScreenState extends State<ProfileScreen> with TickerProviderStateMi
 
   @override
   Widget build(BuildContext context) {
+    User user = Provider.of<User>(context); // ref the current user status through provider
+
+    if (user != null) {
+      // if the user is logged in
+      return loggedInUI(user);
+    } else {
+      return loggedOutUI();
+    }
+  }
+
+  Widget loggedInUI(user) {
     return Container(
       color: DesignCourseAppTheme.nearlyWhite,
       child: Scaffold(
@@ -60,7 +72,37 @@ class ProfileScreenState extends State<ProfileScreen> with TickerProviderStateMi
                 child: Container(
                   height: MediaQuery.of(context).size.height,
                   child: Column(
-                    children: <Widget>[Text("profile")],
+                    children: <Widget>[
+                      Text("logged In"),
+                      Text(user.displayName ?? 'Guest'),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget loggedOutUI() {
+    return Container(
+      color: DesignCourseAppTheme.nearlyWhite,
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        body: Column(
+          children: <Widget>[
+            SizedBox(
+              height: MediaQuery.of(context).padding.top,
+            ),
+            getAppBarUI(),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Container(
+                  height: MediaQuery.of(context).size.height,
+                  child: Column(
+                    children: <Widget>[Text("Logged Out")],
                   ),
                 ),
               ),
