@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -45,12 +46,17 @@ class AuthService {
     // reference the users document
     DocumentReference userRef = _db.collection('users').doc(user.uid);
 
-    return userRef.set(// data payload we wish to save
-        {
-      'uid': user.uid,
-      'email': user.email,
-      'profilePhoto': user.photoURL,
-    }, SetOptions(merge: true)); // merge true in order to not overwrite data
+
+    try{
+      return userRef.set(// data payload we wish to save
+          {
+            'uid': user.uid,
+            'email': user.email,
+            'profilePhoto': user.photoURL,
+          }, SetOptions(merge: true)); // merge true in order to not overwrite data
+    } catch (err) {
+      stderr.writeln('errer entering user into database $err');
+    }
   }
 
   // Sign out
