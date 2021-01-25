@@ -45,6 +45,7 @@ class AuthService {
   Future<void> updateUserData(User user) {
     // reference the users document
     DocumentReference userRef = _db.collection('users').doc(user.uid);
+
     try {
       return userRef.set(// data payload we wish to save
           {
@@ -54,6 +55,7 @@ class AuthService {
       }, SetOptions(merge: true)); // merge true in order to not overwrite data
     } catch (err) {
       stderr.writeln('Error entering user into database $err');
+
     }
   }
 
