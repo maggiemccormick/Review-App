@@ -29,7 +29,7 @@ class ProfileScreenState extends State<ProfileScreen> with TickerProviderStateMi
   List<TabIconData> tabIconsList = TabIconData.tabIconsList;
 
   Widget tabBody = Container(
-    color: DesignCourseAppTheme.dismissibleBackground,
+    color: AppTheme.dismissibleBackground,
   );
 
   @override
@@ -57,6 +57,15 @@ class ProfileScreenState extends State<ProfileScreen> with TickerProviderStateMi
   Widget build(BuildContext context) {
     User user = Provider.of<User>(context); // ref the current user status through provider
 
+    if (user != null) {
+      // if the user is logged in
+      return loggedInUI(user);
+    } else {
+      return loggedOutUI();
+    }
+  }
+
+  Widget loggedInUI(user) {
     return Scaffold(
       body: Stack(
         children: <Widget>[
@@ -64,7 +73,7 @@ class ProfileScreenState extends State<ProfileScreen> with TickerProviderStateMi
             height: 200.0,
             decoration: BoxDecoration(
               gradient: LinearGradient(
-                  colors: [Colors.indigo.shade300, Colors.indigo.shade500]),
+                  colors: [AppTheme.nearlyBlue, AppTheme.nearlyDarkBlue]),
             ),
           ),
           ListView.builder(
@@ -73,16 +82,37 @@ class ProfileScreenState extends State<ProfileScreen> with TickerProviderStateMi
           ),
         ],
       ),
-    );
-    /*if (user != null) {
-      // if the user is logged in
-      return loggedInUI(user);
-    } else {
-      return loggedOutUI();
-    }*/
+    );/*Container(
+      color: DesignCourseAppTheme.nearlyWhite,
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        body: Column(
+          children: <Widget>[
+            SizedBox(
+              height: MediaQuery.of(context).padding.top,
+            ),
+            getAppBarUI(),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Container(
+                  height: MediaQuery.of(context).size.height,
+                  child: Column(
+                    children: <Widget>[
+                      Text("logged In"),
+                      Text(user.displayName ?? 'Guest'),
+                      logoutButton(),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),*/
   }
 
   Widget _mainListBuilder(BuildContext context, int index) {
+    print(index);
     if (index == 0) return _buildHeader(context);
     if (index == 1) return _buildSectionHeader(context);
     if (index == 2) return _buildCollectionsRow();
@@ -91,7 +121,7 @@ class ProfileScreenState extends State<ProfileScreen> with TickerProviderStateMi
           color: Colors.white,
           padding: EdgeInsets.only(left: 20.0, top: 20.0, bottom: 10.0),
           child: Text("Most liked posts",
-              style: Theme.of(context).textTheme.title));
+              style: AppTheme.title));
     return _buildListItem();
   }
 
@@ -121,10 +151,7 @@ class ProfileScreenState extends State<ProfileScreen> with TickerProviderStateMi
                     height: 5.0,
                   ),
                   Text("Title Here",  //collections[index]['title'],
-                      style: Theme.of(context)
-                          .textTheme
-                          .subhead
-                          .merge(TextStyle(color: Colors.grey.shade600)))
+                      style: AppTheme.subtitle)
                 ],
               ));
         },
@@ -146,21 +173,22 @@ class ProfileScreenState extends State<ProfileScreen> with TickerProviderStateMi
   Container _buildSectionHeader(BuildContext context) {
     return Container(
       color: Colors.white,
-      padding: EdgeInsets.symmetric(horizontal: 20.0),
+      padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           Text(
             "Collection",
-            style: Theme.of(context).textTheme.title,
+            style: AppTheme.title,
           ),
-          FlatButton(
+          // NOTE: don't need this button rn but leaving here in case we can use it later
+          /*FlatButton(
             onPressed: () {},
             child: Text(
               "Create new",
-              style: TextStyle(color: Colors.blue),
+              style: TextStyle(color: AppTheme.nearlyBlue),
             ),
-          )
+          )*/
         ],
       ),
     );
@@ -186,43 +214,36 @@ class ProfileScreenState extends State<ProfileScreen> with TickerProviderStateMi
                     height: 50.0,
                   ),
                   Text(
-                    "Mebina Nepal",
-                    style: Theme.of(context).textTheme.title,
+                    "Jane Doe",
+                    //user.displayName ?? 'Guest',
+                    style: AppTheme.title,
                   ),
                   SizedBox(
                     height: 5.0,
                   ),
-                  Text("UI/UX designer | Foodie | Kathmandu"),
+                  Text(
+                    "Ui/Ux designer | Foodie | Yogi",
+                    style: AppTheme.subtitle,
+                  ),
                   SizedBox(
-                    height: 16.0,
+                    height: 10.0,
                   ),
                   Container(
-                    height: 40.0,
+                    height: 30.0,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Expanded(
                           child: ListTile(
                             title: Text(
-                              "302",
+                              "30",
                               textAlign: TextAlign.center,
                               style: TextStyle(fontWeight: FontWeight.bold),
                             ),
-                            subtitle: Text("Posts".toUpperCase(),
+                            subtitle: Text("Reviews".toUpperCase(),
                                 textAlign: TextAlign.center,
-                                style: TextStyle(fontSize: 12.0)),
-                          ),
-                        ),
-                        Expanded(
-                          child: ListTile(
-                            title: Text(
-                              "10.3K",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(fontWeight: FontWeight.bold),
+                                style: AppTheme.body2,
                             ),
-                            subtitle: Text("Followers".toUpperCase(),
-                                textAlign: TextAlign.center,
-                                style: TextStyle(fontSize: 12.0)),
                           ),
                         ),
                         Expanded(
@@ -234,7 +255,7 @@ class ProfileScreenState extends State<ProfileScreen> with TickerProviderStateMi
                             ),
                             subtitle: Text("Following".toUpperCase(),
                                 textAlign: TextAlign.center,
-                                style: TextStyle(fontSize: 12.0)),
+                                style: AppTheme.body2),
                           ),
                         ),
                       ],
@@ -258,37 +279,6 @@ class ProfileScreenState extends State<ProfileScreen> with TickerProviderStateMi
             ],
           ),
         ],
-      ),
-    );
-  }
-
-  Widget loggedInUI(user) {
-    return Container(
-      color: DesignCourseAppTheme.nearlyWhite,
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        body: Column(
-          children: <Widget>[
-            SizedBox(
-              height: MediaQuery.of(context).padding.top,
-            ),
-            getAppBarUI(),
-            Expanded(
-              child: SingleChildScrollView(
-                child: Container(
-                  height: MediaQuery.of(context).size.height,
-                  child: Column(
-                    children: <Widget>[
-                      Text("logged In"),
-                      Text(user.displayName ?? 'Guest'),
-                      logoutButton(),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
       ),
     );
   }
