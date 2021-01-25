@@ -1,4 +1,3 @@
-import 'package:Redlands_Strong/screens/screens.dart';
 import 'package:Redlands_Strong/services/services.dart';
 import 'package:Redlands_Strong/shared/shared.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -10,13 +9,7 @@ import 'package:provider/provider.dart';
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key key, this.animationController}) : super(key: key);
   final AnimationController animationController;
-  // Lines 14-19: The code from the repo that calls the cards to make the collection list
-  /*final List<Map> collections = [
-    {"title": "Food joint", "image": meal},
-    {"title": "Photos", "image": images[1]},
-    {"title": "Travel", "image": fishtail},
-    {"title": "Nepal", "image": kathmandu2},
-  ];*/
+
   @override
   State<StatefulWidget> createState() => ProfileScreenState();
   static final String path = "lib/src/pages/profile/profile2.dart";
@@ -25,6 +18,8 @@ class ProfileScreen extends StatefulWidget {
 class ProfileScreenState extends State<ProfileScreen> with TickerProviderStateMixin {
   final AuthService auth = AuthService();
   AnimationController animationController;
+
+  User user;
 
   List<TabIconData> tabIconsList = TabIconData.tabIconsList;
 
@@ -55,7 +50,7 @@ class ProfileScreenState extends State<ProfileScreen> with TickerProviderStateMi
 
   @override
   Widget build(BuildContext context) {
-    User user = Provider.of<User>(context); // ref the current user status through provider
+    user = Provider.of<User>(context); // ref the current user status through provider
 
     if (user != null) {
       // if the user is logged in
@@ -72,126 +67,26 @@ class ProfileScreenState extends State<ProfileScreen> with TickerProviderStateMi
           Container(
             height: 200.0,
             decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  colors: [AppTheme.nearlyBlue, AppTheme.nearlyDarkBlue]),
+              gradient: LinearGradient(colors: [AppTheme.nearlyBlue, AppTheme.nearlyDarkBlue]),
             ),
           ),
           ListView.builder(
-            itemCount: 7,
+            itemCount: 6,
             itemBuilder: _mainListBuilder,
           ),
         ],
       ),
-    );/*Container(
-      color: DesignCourseAppTheme.nearlyWhite,
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        body: Column(
-          children: <Widget>[
-            SizedBox(
-              height: MediaQuery.of(context).padding.top,
-            ),
-            getAppBarUI(),
-            Expanded(
-              child: SingleChildScrollView(
-                child: Container(
-                  height: MediaQuery.of(context).size.height,
-                  child: Column(
-                    children: <Widget>[
-                      Text("logged In"),
-                      Text(user.displayName ?? 'Guest'),
-                      logoutButton(),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),*/
+    );
   }
 
   Widget _mainListBuilder(BuildContext context, int index) {
     print(index);
     if (index == 0) return _buildHeader(context);
-    if (index == 1) return _buildSectionHeader(context);
-    if (index == 2) return _buildCollectionsRow();
-    if (index == 3)
-      return Container(
-          color: Colors.white,
-          padding: EdgeInsets.only(left: 20.0, top: 20.0, bottom: 10.0),
-          child: Text("Most liked posts",
-              style: AppTheme.title));
+    if (index == 1) return _buildReviewsSection(context);
+    if (index == 2) return _buildFavouritesSection(context);
+    if (index == 3) return _buildFriendsSection(context);
+    if (index == 4) return logoutButton();
     return _buildListItem();
-  }
-
-  Container _buildCollectionsRow() {
-    return Container(
-      color: Colors.white,
-      height: 200.0,
-      padding: EdgeInsets.symmetric(horizontal: 10.0),
-      child: ListView.builder(
-        physics: BouncingScrollPhysics(),
-        scrollDirection: Axis.horizontal,
-        itemCount: 2,//collections.length,
-        itemBuilder: (BuildContext context, int index) {
-          return Container(
-              margin: EdgeInsets.symmetric(vertical: 5.0, horizontal: 10.0),
-              width: 150.0,
-              height: 200.0,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Expanded(
-                      child: ClipRRect(
-                          borderRadius: BorderRadius.circular(5.0),
-                          //child: PNetworkImage(collections[index]['image'], fit: BoxFit.cover)
-                      )),
-                  SizedBox(
-                    height: 5.0,
-                  ),
-                  Text("Title Here",  //collections[index]['title'],
-                      style: AppTheme.subtitle)
-                ],
-              ));
-        },
-      ),
-    );
-  }
-
-  Widget _buildListItem() {
-    return Container(
-      color: Colors.white,
-      padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(5.0),
-        //child: PNetworkImage(images[2], fit: BoxFit.cover), FIX THIS LINE
-      ),
-    );
-  }
-
-  Container _buildSectionHeader(BuildContext context) {
-    return Container(
-      color: Colors.white,
-      padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          Text(
-            "Collection",
-            style: AppTheme.title,
-          ),
-          // NOTE: don't need this button rn but leaving here in case we can use it later
-          /*FlatButton(
-            onPressed: () {},
-            child: Text(
-              "Create new",
-              style: TextStyle(color: AppTheme.nearlyBlue),
-            ),
-          )*/
-        ],
-      ),
-    );
   }
 
   Container _buildHeader(BuildContext context) {
@@ -201,11 +96,9 @@ class ProfileScreenState extends State<ProfileScreen> with TickerProviderStateMi
       child: Stack(
         children: <Widget>[
           Container(
-            padding: EdgeInsets.only(
-                top: 40.0, left: 40.0, right: 40.0, bottom: 10.0),
+            padding: EdgeInsets.only(top: 40.0, left: 40.0, right: 40.0, bottom: 10.0),
             child: Material(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0)),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
               elevation: 5.0,
               color: Colors.white,
               child: Column(
@@ -214,7 +107,7 @@ class ProfileScreenState extends State<ProfileScreen> with TickerProviderStateMi
                     height: 50.0,
                   ),
                   Text(
-                    "Jane Doe",
+                    user.displayName ?? 'Guest',
                     //user.displayName ?? 'Guest',
                     style: AppTheme.title,
                   ),
@@ -222,7 +115,8 @@ class ProfileScreenState extends State<ProfileScreen> with TickerProviderStateMi
                     height: 5.0,
                   ),
                   Text(
-                    "Ui/Ux designer | Foodie | Yogi",
+                    // description of user
+                    user.email ?? 'email@gmail.com',
                     style: AppTheme.subtitle,
                   ),
                   SizedBox(
@@ -240,22 +134,22 @@ class ProfileScreenState extends State<ProfileScreen> with TickerProviderStateMi
                               textAlign: TextAlign.center,
                               style: TextStyle(fontWeight: FontWeight.bold),
                             ),
-                            subtitle: Text("Reviews".toUpperCase(),
-                                textAlign: TextAlign.center,
-                                style: AppTheme.body2,
+                            subtitle: Text(
+                              "Reviews".toUpperCase(),
+                              textAlign: TextAlign.center,
+                              style: AppTheme.body2,
                             ),
                           ),
                         ),
                         Expanded(
                           child: ListTile(
                             title: Text(
-                              "120",
+                              "12",
                               textAlign: TextAlign.center,
                               style: TextStyle(fontWeight: FontWeight.bold),
                             ),
-                            subtitle: Text("Following".toUpperCase(),
-                                textAlign: TextAlign.center,
-                                style: AppTheme.body2),
+                            subtitle: Text("Favourites".toUpperCase(),
+                                textAlign: TextAlign.center, style: AppTheme.body2),
                           ),
                         ),
                       ],
@@ -272,13 +166,88 @@ class ProfileScreenState extends State<ProfileScreen> with TickerProviderStateMi
                 elevation: 5.0,
                 shape: CircleBorder(),
                 child: CircleAvatar(
-                  radius: 40.0,
-                  backgroundImage: AssetImage("assets/images/userImage.png")
-                ),
+                    radius: 40.0,
+                    backgroundImage:
+                        NetworkImage(user.photoURL) ?? AssetImage("assets/images/userImage.png")),
               ),
             ],
           ),
         ],
+      ),
+    );
+  }
+
+  Container _buildReviewsSection(BuildContext context) {
+    return Container(
+      color: Colors.transparent,
+      padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          SizedBox(
+            height: 200,
+            child: Text(
+              "Reviews",
+              style: AppTheme.title,
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  Container _buildFavouritesSection(BuildContext context) {
+    return Container(
+        height: 250,
+        color: Colors.transparent,
+        padding: EdgeInsets.only(left: 20.0, top: 20.0, bottom: 10.0),
+        child: Text("Favourite locations", style: AppTheme.title));
+  }
+
+  Container _buildFriendsSection(BuildContext context) {
+    return Container(
+        height: 250,
+        color: Colors.transparent,
+        padding: EdgeInsets.only(left: 20.0, top: 20.0, bottom: 10.0),
+        child: Text("Friends", style: AppTheme.title));
+  }
+
+  Widget _buildListItem() {
+    return Container(
+      color: Colors.transparent,
+      padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+      child: ClipRRect(
+        child: SizedBox(
+          height: 50.0,
+        ),
+        borderRadius: BorderRadius.circular(5.0),
+        //child: PNetworkImage(images[2], fit: BoxFit.cover), FIX THIS LINE
+      ),
+    );
+  }
+
+  Widget logoutButton() {
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(colors: [AppTheme.nearlyBlue, AppTheme.nearlyDarkBlue]),
+      ),
+      margin: EdgeInsets.only(bottom: 10, top: 10),
+      child: ClipRRect(
+        child: FlatButton.icon(
+          padding: EdgeInsets.all(30),
+          icon: Icon(FontAwesomeIcons.signOutAlt, color: Colors.white),
+          onPressed: () async {
+            await auth.signOut();
+          },
+          label: Expanded(
+            child: Text(
+              'Sign Out',
+              textAlign: TextAlign.center,
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
+        ),
+        borderRadius: BorderRadius.circular(5.0),
       ),
     );
   }
@@ -304,7 +273,6 @@ class ProfileScreenState extends State<ProfileScreen> with TickerProviderStateMi
                       LoginButton(
                         text: 'LOGIN WITH GOOGLE',
                         icon: FontAwesomeIcons.google,
-                        color: Colors.black45,
                         loginMethod: auth.googleSignIn,
                       ),
                     ],
@@ -313,23 +281,6 @@ class ProfileScreenState extends State<ProfileScreen> with TickerProviderStateMi
               ),
             ),
           ],
-        ),
-      ),
-    );
-  }
-
-  Widget logoutButton() {
-    return Container(
-      margin: EdgeInsets.only(bottom: 10),
-      child: FlatButton.icon(
-        padding: EdgeInsets.all(30),
-        icon: Icon(FontAwesomeIcons.signOutAlt, color: Colors.white),
-        color: Colors.black45,
-        onPressed: () async {
-          await auth.signOut();
-        },
-        label: Expanded(
-          child: Text('Sign Out', textAlign: TextAlign.center),
         ),
       ),
     );
@@ -365,41 +316,6 @@ class ProfileScreenState extends State<ProfileScreen> with TickerProviderStateMi
           )
         ],
       ),
-    );
-  }
-
-  Widget bottomBar() {
-    return Column(
-      children: <Widget>[
-        const Expanded(
-          child: SizedBox(),
-        ),
-        BottomBarView(
-          tabIconsList: tabIconsList,
-          addClick: () {},
-          changeIndex: (int index) {
-            if (index == 0) {
-              animationController.reverse().then<dynamic>((data) {
-                if (!mounted) {
-                  return;
-                }
-                setState(() {
-                  tabBody = ReviewsScreen(animationController: animationController);
-                });
-              });
-            } else if (index == 1) {
-              animationController.reverse().then<dynamic>((data) {
-                if (!mounted) {
-                  return;
-                }
-                setState(() {
-                  tabBody = ProfileScreen(animationController: animationController);
-                });
-              });
-            }
-          },
-        ),
-      ],
     );
   }
 }
