@@ -1,3 +1,4 @@
+import 'package:Redlands_Strong/shared/shared.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -14,20 +15,25 @@ class LoginButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(colors: [AppTheme.nearlyBlue, AppTheme.nearlyDarkBlue]),
+      ),
       margin: EdgeInsets.only(bottom: 10),
-      child: FlatButton.icon(
-        padding: EdgeInsets.all(30),
-        icon: Icon(icon, color: Colors.white),
-        color: color,
-        onPressed: () async {
-          var user = await loginMethod();
-          if (user != null) {
-            print("user logged in as ${user.displayName}");
-          }
-        },
-        label: Expanded(
-          child: Text('$text', textAlign: TextAlign.center),
+      child: ClipRRect(
+        child: FlatButton.icon(
+          padding: EdgeInsets.all(30),
+          icon: Icon(icon, color: Colors.white),
+          onPressed: () async {
+            var user = await loginMethod();
+            if (user != null) {
+              print("user logged in as ${user.displayName}");
+            }
+          },
+          label: Expanded(
+            child: Text('$text', textAlign: TextAlign.center),
+          ),
         ),
+        borderRadius: BorderRadius.circular(5.0),
       ),
     );
   }
