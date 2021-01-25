@@ -1,13 +1,13 @@
 import 'package:Redlands_Strong/main.dart';
-import 'package:Redlands_Strong/screens/profile_screen.dart';
-import 'package:Redlands_Strong/services/models/tabIcon_data.dart';
-import 'package:Redlands_Strong/shared/bottom_bar_view.dart';
-import 'package:Redlands_Strong/shared/reviews_list_view.dart';
+import 'package:Redlands_Strong/screens/screens.dart';
+import 'package:Redlands_Strong/services/services.dart';
+import 'package:Redlands_Strong/shared/shared.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-import '../shared/themes/design_course_app_theme.dart';
 import 'course_info_screen.dart';
 
+/// This class will act as the container for each category and the associated businesses
 class ReviewsScreen extends StatefulWidget {
   const ReviewsScreen({Key key, this.animationController}) : super(key: key);
 
@@ -17,6 +17,8 @@ class ReviewsScreen extends StatefulWidget {
 }
 
 class _ReviewsScreenState extends State<ReviewsScreen> with TickerProviderStateMixin {
+  final db = DatabaseService();
+
   CategoryType categoryType = CategoryType.ui;
 
   AnimationController animationController;
@@ -32,7 +34,7 @@ class _ReviewsScreenState extends State<ReviewsScreen> with TickerProviderStateM
     tabIconsList.forEach((TabIconData tab) {
       tab.isSelected = false;
     });
-    tabIconsList[0].isSelected = true;
+    tabIconsList[0].isSelected = true; // instantiate bottom nav bar tab to businesses screen
 
     animationController =
         AnimationController(duration: const Duration(milliseconds: 600), vsync: this);
@@ -57,17 +59,19 @@ class _ReviewsScreenState extends State<ReviewsScreen> with TickerProviderStateM
             SizedBox(
               height: MediaQuery.of(context).padding.top,
             ),
-            getAppBarUI(),
+            getAppBarUI(), // the top app bar with title and logo
             Expanded(
               child: SingleChildScrollView(
                 child: Container(
-                  height: MediaQuery.of(context).size.height,
+                  height: MediaQuery.of(context).size.height + 400,
                   child: Column(
                     children: <Widget>[
-                      getSearchBarUI(),
-                      getCategoryUI("Movie Theaters"),
-                      getCategoryUI("Restaurants"),
+                      getSearchBarUI(), // search bar under the app bar
+                      getCategoryUI("Entertainment"),
+                      getCategoryUI("Food"),
                       getCategoryUI("Bars"),
+                      getCategoryUI("Shopping"),
+                      getCategoryUI("Health & Beauty"),
                     ],
                   ),
                 ),
@@ -79,114 +83,7 @@ class _ReviewsScreenState extends State<ReviewsScreen> with TickerProviderStateM
     );
   }
 
-  Widget getCategoryUI(String categoryName) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.only(top: 8.0, left: 18, right: 16),
-          child: Text(
-            categoryName,
-            textAlign: TextAlign.left,
-            style: TextStyle(
-              fontWeight: FontWeight.w600,
-              fontSize: 22,
-              letterSpacing: 0.27,
-              color: DesignCourseAppTheme.darkerText,
-            ),
-          ),
-        ),
-        ReviewsListView(
-          callBack: () {
-            moveTo();
-          },
-        ),
-      ],
-    );
-  }
-
-  void moveTo() {
-    Navigator.push<dynamic>(
-      context,
-      MaterialPageRoute<dynamic>(
-        builder: (BuildContext context) => CourseInfoScreen(),
-      ),
-    );
-  }
-
-  Widget getSearchBarUI() {
-    return Padding(
-      padding: const EdgeInsets.only(top: 8.0, left: 18),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Container(
-            width: MediaQuery.of(context).size.width * 0.75,
-            height: 64,
-            child: Padding(
-              padding: const EdgeInsets.only(top: 8, bottom: 8),
-              child: Container(
-                decoration: BoxDecoration(
-                  color: HexColor('#F8FAFB'),
-                  borderRadius: const BorderRadius.only(
-                    bottomRight: Radius.circular(13.0),
-                    bottomLeft: Radius.circular(13.0),
-                    topLeft: Radius.circular(13.0),
-                    topRight: Radius.circular(13.0),
-                  ),
-                ),
-                child: Row(
-                  children: <Widget>[
-                    Expanded(
-                      child: Container(
-                        padding: const EdgeInsets.only(left: 16, right: 16),
-                        child: TextFormField(
-                          style: TextStyle(
-                            fontFamily: 'WorkSans',
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                            color: DesignCourseAppTheme.nearlyBlue,
-                          ),
-                          keyboardType: TextInputType.text,
-                          decoration: InputDecoration(
-                            labelText: 'Search for course',
-                            border: InputBorder.none,
-                            helperStyle: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
-                              color: HexColor('#B9BABC'),
-                            ),
-                            labelStyle: TextStyle(
-                              fontWeight: FontWeight.w600,
-                              fontSize: 16,
-                              letterSpacing: 0.2,
-                              color: HexColor('#B9BABC'),
-                            ),
-                          ),
-                          onEditingComplete: () {},
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      width: 60,
-                      height: 60,
-                      child: Icon(Icons.search, color: HexColor('#B9BABC')),
-                    )
-                  ],
-                ),
-              ),
-            ),
-          ),
-          const Expanded(
-            child: SizedBox(),
-          )
-        ],
-      ),
-    );
-  }
-
+  /// The containing widget for the ap bar containing the app title and logo
   Widget getAppBarUI() {
     return Padding(
       padding: const EdgeInsets.only(top: 8.0, left: 18, right: 18),
@@ -230,38 +127,121 @@ class _ReviewsScreenState extends State<ReviewsScreen> with TickerProviderStateM
     );
   }
 
-  Widget bottomBar() {
+  /// The search bar underneath the app bar which allows users to search for businesses
+  Widget getSearchBarUI() {
+    return Padding(
+      padding: const EdgeInsets.only(top: 8.0, left: 18),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Container(
+            width: MediaQuery.of(context).size.width * 0.75,
+            height: 64,
+            child: Padding(
+              padding: const EdgeInsets.only(top: 8, bottom: 8),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: HexColor('#F8FAFB'),
+                  borderRadius: const BorderRadius.only(
+                    bottomRight: Radius.circular(13.0),
+                    bottomLeft: Radius.circular(13.0),
+                    topLeft: Radius.circular(13.0),
+                    topRight: Radius.circular(13.0),
+                  ),
+                ),
+                child: Row(
+                  children: <Widget>[
+                    Expanded(
+                      child: Container(
+                        padding: const EdgeInsets.only(left: 16, right: 16),
+                        child: TextFormField(
+                          style: TextStyle(
+                            fontFamily: 'WorkSans',
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                            color: DesignCourseAppTheme.nearlyBlue,
+                          ),
+                          keyboardType: TextInputType.text,
+                          decoration: InputDecoration(
+                            labelText: 'Search for businesses',
+                            border: InputBorder.none,
+                            helperStyle: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                              color: HexColor('#B9BABC'),
+                            ),
+                            labelStyle: TextStyle(
+                              fontWeight: FontWeight.w600,
+                              fontSize: 16,
+                              letterSpacing: 0.2,
+                              color: HexColor('#B9BABC'),
+                            ),
+                          ),
+                          onEditingComplete: () {},
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 60,
+                      height: 60,
+                      child: Icon(Icons.search, color: HexColor('#B9BABC')),
+                    )
+                  ],
+                ),
+              ),
+            ),
+          ),
+          const Expanded(
+            child: SizedBox(),
+          )
+        ],
+      ),
+    );
+  }
+
+  /// The containing widget for each category as a row. It contains the category title as well as
+  /// the businesses associated with each category
+  Widget getCategoryUI(String categoryName) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        const Expanded(
-          child: SizedBox(),
+        Padding(
+          padding: const EdgeInsets.only(top: 8.0, left: 18, right: 16),
+          child: Text(
+            categoryName,
+            textAlign: TextAlign.left,
+            style: TextStyle(
+              fontWeight: FontWeight.w600,
+              fontSize: 22,
+              letterSpacing: 0.27,
+              color: DesignCourseAppTheme.darkerText,
+            ),
+          ),
         ),
-        BottomBarView(
-          tabIconsList: tabIconsList,
-          addClick: () {},
-          changeIndex: (int index) {
-            if (index == 0) {
-              animationController.reverse().then<dynamic>((data) {
-                if (!mounted) {
-                  return;
-                }
-                setState(() {
-                  tabBody = ProfileScreen(animationController: animationController);
-                });
-              });
-            } else if (index == 1) {
-              animationController.reverse().then<dynamic>((data) {
-                if (!mounted) {
-                  return;
-                }
-                setState(() {
-                  tabBody = ReviewsScreen(animationController: animationController);
-                });
-              });
-            }
-          },
+
+        /// Stream provider injects the async stream of businesses into the list view
+        StreamProvider<List<Business>>.value(
+          // All children will have access to business data
+          value: db.streamBusinesses(categoryName),
+          child: BusinessesListView(
+            callBack: () {
+              moveTo();
+            },
+          ),
         ),
       ],
+    );
+  }
+
+  void moveTo() {
+    // function for navigating to the business info/reviews screen
+    Navigator.push<dynamic>(
+      context,
+      MaterialPageRoute<dynamic>(
+        builder: (BuildContext context) => CourseInfoScreen(),
+      ),
     );
   }
 }

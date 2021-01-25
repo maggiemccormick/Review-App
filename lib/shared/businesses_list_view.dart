@@ -1,20 +1,23 @@
 import 'package:Redlands_Strong/main.dart';
-import 'package:Redlands_Strong/services/models/review.dart';
+import 'package:Redlands_Strong/services/models.dart';
 import 'package:Redlands_Strong/shared/themes/design_course_app_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 // This class contains the widget for the list of reviews for each category
 
-class ReviewsListView extends StatefulWidget {
-  const ReviewsListView({Key key, this.callBack}) : super(key: key);
+class BusinessesListView extends StatefulWidget {
+  const BusinessesListView({Key key, this.callBack}) : super(key: key);
 
   final Function callBack;
+
   @override
-  _ReviewsListViewState createState() => _ReviewsListViewState();
+  _BusinessesListViewState createState() => _BusinessesListViewState();
 }
 
-class _ReviewsListViewState extends State<ReviewsListView> with TickerProviderStateMixin {
+class _BusinessesListViewState extends State<BusinessesListView> with TickerProviderStateMixin {
   AnimationController animationController;
+  var businesses;
 
   @override
   void initState() {
@@ -36,41 +39,33 @@ class _ReviewsListViewState extends State<ReviewsListView> with TickerProviderSt
 
   @override
   Widget build(BuildContext context) {
+    businesses = Provider.of<List<Business>>(context);
     return Padding(
       padding: const EdgeInsets.only(top: 16, bottom: 16),
       child: Container(
         height: 134,
         width: double.infinity,
-        child: FutureBuilder<bool>(
-          future: getData(),
-          builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
-            if (!snapshot.hasData) {
-              return const SizedBox();
-            } else {
-              return ListView.builder(
-                padding: const EdgeInsets.only(top: 0, bottom: 0, right: 16, left: 16),
-                itemCount: Review.categoryList.length,
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (BuildContext context, int index) {
-                  final int count =
-                      Review.categoryList.length > 10 ? 10 : Review.categoryList.length;
-                  final Animation<double> animation = Tween<double>(begin: 0.0, end: 1.0).animate(
-                      CurvedAnimation(
-                          parent: animationController,
-                          curve: Interval((1 / count) * index, 1.0, curve: Curves.fastOutSlowIn)));
-                  animationController.forward();
+        child: ListView.builder(
+          padding: const EdgeInsets.only(top: 0, bottom: 0, right: 16, left: 16),
+          itemCount: businesses.length,
+          scrollDirection: Axis.horizontal,
+          itemBuilder: (BuildContext context, int index) {
+            final int count = businesses.length > 10 ? 10 : businesses.length;
+            final Animation<double> animation = Tween<double>(begin: 0.0, end: 1.0).animate(
+                CurvedAnimation(
+                    parent: animationController,
+                    curve: Interval((1 / count) * index, 1.0, curve: Curves.fastOutSlowIn)));
+            animationController.forward();
 
-                  return CategoryView(
-                    category: Review.categoryList[index],
-                    animation: animation,
-                    animationController: animationController,
-                    callback: () {
-                      widget.callBack();
-                    },
-                  );
-                },
-              );
-            }
+            // The individual business card with the index, animations and callback when clicked
+            return BusinessView(
+              business: businesses[index],
+              animation: animation,
+              animationController: animationController,
+              callback: () {
+                widget.callBack();
+              },
+            );
           },
         ),
       ),
@@ -78,13 +73,15 @@ class _ReviewsListViewState extends State<ReviewsListView> with TickerProviderSt
   }
 }
 
-class CategoryView extends StatelessWidget {
-  const CategoryView(
-      {Key key, this.category, this.animationController, this.animation, this.callback})
+/// This class acts as the containing widget for the individual business card
+/// and associated information
+class BusinessView extends StatelessWidget {
+  const BusinessView(
+      {Key key, this.business, this.animationController, this.animation, this.callback})
       : super(key: key);
 
   final VoidCallback callback;
-  final Review category;
+  final Business business; // the individual business object (typed to Business) at pos i in array
   final AnimationController animationController;
   final Animation<dynamic> animation;
 
@@ -125,13 +122,14 @@ class CategoryView extends StatelessWidget {
                                     width: 48 + 24.0,
                                   ),
                                   Expanded(
+                                    // widget containing business card information
                                     child: Container(
                                       child: Column(
                                         children: <Widget>[
                                           Padding(
                                             padding: const EdgeInsets.only(top: 16),
                                             child: Text(
-                                              category.title,
+                                              business.name,
                                               textAlign: TextAlign.left,
                                               style: TextStyle(
                                                 fontWeight: FontWeight.w600,
@@ -151,7 +149,7 @@ class CategoryView extends StatelessWidget {
                                               crossAxisAlignment: CrossAxisAlignment.center,
                                               children: <Widget>[
                                                 Text(
-                                                  '${category.numReviews} Reviews',
+                                                  '${business.numReviews} Reviews',
                                                   textAlign: TextAlign.left,
                                                   style: TextStyle(
                                                     fontWeight: FontWeight.w200,
@@ -164,7 +162,7 @@ class CategoryView extends StatelessWidget {
                                                   child: Row(
                                                     children: <Widget>[
                                                       Text(
-                                                        '${category.rating}',
+                                                        '${business.rating}',
                                                         textAlign: TextAlign.left,
                                                         style: TextStyle(
                                                           fontWeight: FontWeight.w200,
@@ -191,7 +189,7 @@ class CategoryView extends StatelessWidget {
                                               crossAxisAlignment: CrossAxisAlignment.start,
                                               children: <Widget>[
                                                 Text(
-                                                  'Value: ${category.money}',
+                                                  'Value: ${business.value}',
                                                   textAlign: TextAlign.left,
                                                   style: TextStyle(
                                                     fontWeight: FontWeight.w600,
@@ -201,16 +199,11 @@ class CategoryView extends StatelessWidget {
                                                   ),
                                                 ),
                                                 Container(
-                                                  decoration: BoxDecoration(
-                                                    color: DesignCourseAppTheme.nearlyBlue,
-                                                    borderRadius: const BorderRadius.all(
-                                                        Radius.circular(8.0)),
-                                                  ),
                                                   child: Padding(
                                                     padding: const EdgeInsets.all(4.0),
                                                     child: Icon(
-                                                      Icons.add,
-                                                      color: DesignCourseAppTheme.nearlyWhite,
+                                                      Icons.favorite,
+                                                      color: DesignCourseAppTheme.nearlyBlue,
                                                     ),
                                                   ),
                                                 )
@@ -236,7 +229,7 @@ class CategoryView extends StatelessWidget {
                             ClipRRect(
                               borderRadius: const BorderRadius.all(Radius.circular(16.0)),
                               child: AspectRatio(
-                                  aspectRatio: 1.0, child: Image.asset(category.imagePath)),
+                                  aspectRatio: 1.0, child: Image.network(business.image)),
                             )
                           ],
                         ),

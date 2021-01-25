@@ -1,4 +1,3 @@
 export 'auth.dart';
-export 'models/category.dart';
-export 'models/review.dart';
-export 'models/tabIcon_data.dart';
+export 'db.dart';
+export 'models.dart';

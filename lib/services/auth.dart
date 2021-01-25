@@ -46,16 +46,16 @@ class AuthService {
     // reference the users document
     DocumentReference userRef = _db.collection('users').doc(user.uid);
 
-
-    try{
+    try {
       return userRef.set(// data payload we wish to save
           {
-            'uid': user.uid,
-            'email': user.email,
-            'profilePhoto': user.photoURL,
-          }, SetOptions(merge: true)); // merge true in order to not overwrite data
+        'uid': user.uid,
+        'email': user.email,
+        'profilePhoto': user.photoURL,
+      }, SetOptions(merge: true)); // merge true in order to not overwrite data
     } catch (err) {
-      stderr.writeln('errer entering user into database $err');
+      stderr.writeln('Error entering user into database $err');
+
     }
   }
 
