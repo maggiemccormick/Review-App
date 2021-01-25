@@ -2,5 +2,3 @@ export 'bottom_bar_view.dart';
 export 'businesses_list_view.dart';
 export 'login_buttons.dart';
 export 'themes/app_theme.dart';
-export 'themes/design_course_app_theme.dart';
-export 'themes/review_app_theme.dart';
