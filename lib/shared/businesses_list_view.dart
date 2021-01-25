@@ -50,13 +50,14 @@ class _BusinessesListViewState extends State<BusinessesListView> with TickerProv
           itemCount: businesses.length,
           scrollDirection: Axis.horizontal,
           itemBuilder: (BuildContext context, int index) {
-            final int count = Review.categoryList.length > 10 ? 10 : Review.categoryList.length;
+            final int count = businesses.length > 10 ? 10 : businesses.length;
             final Animation<double> animation = Tween<double>(begin: 0.0, end: 1.0).animate(
                 CurvedAnimation(
                     parent: animationController,
                     curve: Interval((1 / count) * index, 1.0, curve: Curves.fastOutSlowIn)));
             animationController.forward();
 
+            // The individual business card with the index, animations and callback when clicked
             return BusinessView(
               business: businesses[index],
               animation: animation,
@@ -72,13 +73,15 @@ class _BusinessesListViewState extends State<BusinessesListView> with TickerProv
   }
 }
 
+/// This class acts as the containing widget for the individual business card
+/// and associated information
 class BusinessView extends StatelessWidget {
   const BusinessView(
       {Key key, this.business, this.animationController, this.animation, this.callback})
       : super(key: key);
 
   final VoidCallback callback;
-  final Business business;
+  final Business business; // the individual business object (typed to Business) at pos i in array
   final AnimationController animationController;
   final Animation<dynamic> animation;
 
