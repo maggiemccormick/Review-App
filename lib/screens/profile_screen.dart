@@ -12,14 +12,15 @@ class ProfileScreen extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() => ProfileScreenState();
-  static final String path = "lib/src/pages/profile/profile2.dart";
 }
 
 class ProfileScreenState extends State<ProfileScreen> with TickerProviderStateMixin {
   final AuthService auth = AuthService();
+  final db = DatabaseService();
   AnimationController animationController;
 
-  User user;
+  User user; // user object from firebase auth
+  UserData userData; // user details from firestore document
 
   List<TabIconData> tabIconsList = TabIconData.tabIconsList;
 
@@ -51,16 +52,16 @@ class ProfileScreenState extends State<ProfileScreen> with TickerProviderStateMi
   @override
   Widget build(BuildContext context) {
     user = Provider.of<User>(context); // ref the current user status through provider
-
     if (user != null) {
       // if the user is logged in
-      return loggedInUI(user);
+      return StreamProvider<UserData>.value(
+          value: db.streamUserData(user.uid), child: loggedInUI());
     } else {
       return loggedOutUI();
     }
   }
 
-  Widget loggedInUI(user) {
+  Widget loggedInUI() {
     return Scaffold(
       body: Stack(
         children: <Widget>[
@@ -80,7 +81,6 @@ class ProfileScreenState extends State<ProfileScreen> with TickerProviderStateMi
   }
 
   Widget _mainListBuilder(BuildContext context, int index) {
-    print(index);
     if (index == 0) return _buildHeader(context);
     if (index == 1) return _buildReviewsSection(context);
     if (index == 2) return _buildFavouritesSection(context);
@@ -90,6 +90,7 @@ class ProfileScreenState extends State<ProfileScreen> with TickerProviderStateMi
   }
 
   Container _buildHeader(BuildContext context) {
+    userData = Provider.of<UserData>(context);
     return Container(
       margin: EdgeInsets.only(top: 50.0),
       height: 240.0,
@@ -116,7 +117,7 @@ class ProfileScreenState extends State<ProfileScreen> with TickerProviderStateMi
                   ),
                   Text(
                     // description of user
-                    user.email ?? 'email@gmail.com',
+                    userData.bio ?? 'user bio',
                     style: AppTheme.subtitle,
                   ),
                   SizedBox(

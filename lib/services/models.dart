@@ -36,6 +36,28 @@ class TabIconData {
   ];
 }
 
+/// This class acts as the data model for a user
+class UserData {
+  final String bio;
+  final List<dynamic> friends;
+  final List<dynamic> favourites;
+
+  UserData({
+    this.bio,
+    this.friends,
+    this.favourites,
+  });
+
+  factory UserData.fromFirestore(Map data) {
+    data = data ?? {};
+    // default values in case none exist from firestore
+    return UserData(
+        bio: data['bio'] ?? 'User Bio',
+        friends: data['friends'] ?? [''],
+        favourites: data['favourites'] ?? ['']);
+  }
+}
+
 /// This class acts as the data model for all of the businesses
 class Business {
   final double atmosphere;
@@ -84,5 +106,6 @@ class Business {
 
 class Category {
   final String name;
+
   Category({this.name});
 }
