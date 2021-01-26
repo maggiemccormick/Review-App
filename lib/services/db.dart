@@ -11,14 +11,6 @@ class DatabaseService {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
   User user;
 
-  /// Query a list of Business documents
-  Stream<List<Business>> streamBusinesses(category) {
-    var ref = _db.collection('businesses').where('category', isEqualTo: category);
-    return ref
-        .snapshots()
-        .map((list) => list.docs.map((doc) => Business.fromFirestore(doc)).toList());
-  }
-
   /// Updates the User's data in Firestore on each new login
   Future<void> updateUserData(User user) {
     // reference the users document
@@ -40,6 +32,14 @@ class DatabaseService {
     }
   }
 
+  /// Query a list of Business documents
+  Stream<List<Business>> streamBusinesses(category) {
+    var ref = _db.collection('businesses').where('category', isEqualTo: category);
+    return ref
+        .snapshots()
+        .map((list) => list.docs.map((doc) => Business.fromFirestore(doc)).toList());
+  }
+
   /// Get a stream of a single user document
   /// id: String - The users doc ID
   Stream<UserData> streamUserData(String id) {
@@ -48,5 +48,15 @@ class DatabaseService {
         .doc(id)
         .snapshots()
         .map((snap) => UserData.fromFirestore(snap.data()));
+  }
+
+  /// Streams a list of reviews made by a user
+  /// uid: String - the document ID of the user who created the reviews
+  /// returns: list of Review objects
+  Stream<List<Review>> streamUserReviews(String uid) {
+    var ref = _db.collection('reviews').where('reviewerID', isEqualTo: uid);
+    return ref
+        .snapshots()
+        .map((list) => list.docs.map((doc) => Review.fromFirestore(doc)).toList());
   }
 }

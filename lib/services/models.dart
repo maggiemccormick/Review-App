@@ -60,7 +60,7 @@ class UserData {
 
 /// This class acts as the data model for all of the businesses
 class Business {
-  final double atmosphere;
+  final num atmosphere;
   final String category;
   final String id;
   final String image;
@@ -68,9 +68,9 @@ class Business {
   final String name;
   final int numReviews;
   final int phoneNumber;
-  final double rating;
-  final double service;
-  final double value;
+  final num rating;
+  final num service;
+  final num value;
 
   Business(
       {this.atmosphere,
@@ -101,6 +101,48 @@ class Business {
         rating: data['rating'] ?? 0.0,
         service: data['service'] ?? 0.0,
         value: data['value'] ?? 0.0);
+  }
+}
+
+/// This class acts as the data model for a Review instance
+class Review {
+  final String review;
+  final String reviewerName;
+  final String reviewerID;
+  final String businessName;
+  final String businessID;
+  final String datePosted;
+  final double atmosphere;
+  final num service;
+  final num value;
+  final num rating;
+
+  Review(
+      {this.reviewerName,
+      this.reviewerID,
+      this.businessName,
+      this.businessID,
+      this.review,
+      this.datePosted,
+      this.atmosphere,
+      this.service,
+      this.value,
+      this.rating});
+
+  factory Review.fromFirestore(DocumentSnapshot doc) {
+    var data = doc.data();
+    // default values in case none exist from firestore
+    return Review(
+        review: data['review'] ?? '',
+        reviewerName: data['reviewerName'] ?? '',
+        reviewerID: data['reviewerID'] ?? '',
+        businessName: data['businessName'] ?? '',
+        businessID: data['businessID'] ?? '',
+        datePosted: data['datePosted'] ?? '',
+        atmosphere: data['atmosphere'] ?? 0.0,
+        service: data['service'] ?? 0.0,
+        value: data['value'] ?? 0.0,
+        rating: data['rating'] ?? 0.0);
   }
 }
 

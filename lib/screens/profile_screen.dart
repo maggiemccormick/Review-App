@@ -1,4 +1,5 @@
 import 'package:Redlands_Strong/services/services.dart';
+import 'package:Redlands_Strong/shared/reviews_list.dart';
 import 'package:Redlands_Strong/shared/shared.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -21,7 +22,7 @@ class ProfileScreenState extends State<ProfileScreen> with TickerProviderStateMi
 
   User user; // user object from firebase auth
   UserData userData; // user details from firestore document
-
+  List<Review> reviews;
   List<TabIconData> tabIconsList = TabIconData.tabIconsList;
 
   Widget tabBody = Container(
@@ -54,8 +55,15 @@ class ProfileScreenState extends State<ProfileScreen> with TickerProviderStateMi
     user = Provider.of<User>(context); // ref the current user status through provider
     if (user != null) {
       // if the user is logged in
-      return StreamProvider<UserData>.value(
-          value: db.streamUserData(user.uid), child: loggedInUI());
+      return MultiProvider(providers: [
+        StreamProvider<UserData>.value(
+          value: db.streamUserData(user.uid),
+        ),
+        StreamProvider<List<Review>>.value(
+          // All children will have access to business data
+          value: db.streamUserReviews(user.uid),
+        ),
+      ], child: loggedInUI());
     } else {
       return loggedOutUI();
     }
@@ -91,6 +99,7 @@ class ProfileScreenState extends State<ProfileScreen> with TickerProviderStateMi
 
   Container _buildHeader(BuildContext context) {
     userData = Provider.of<UserData>(context);
+    reviews = Provider.of<List<Review>>(context);
     return Container(
       margin: EdgeInsets.only(top: 50.0),
       height: 240.0,
@@ -131,7 +140,7 @@ class ProfileScreenState extends State<ProfileScreen> with TickerProviderStateMi
                         Expanded(
                           child: ListTile(
                             title: Text(
-                              "30",
+                              "${reviews.length ?? 0}",
                               textAlign: TextAlign.center,
                               style: TextStyle(fontWeight: FontWeight.bold),
                             ),
@@ -178,22 +187,26 @@ class ProfileScreenState extends State<ProfileScreen> with TickerProviderStateMi
     );
   }
 
-  Container _buildReviewsSection(BuildContext context) {
-    return Container(
-      color: Colors.transparent,
-      padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          SizedBox(
-            height: 200,
-            child: Text(
-              "Reviews",
-              style: AppTheme.title,
+  Widget _buildReviewsSection(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Padding(
+          padding: const EdgeInsets.only(top: 8.0, left: 18, right: 16, bottom: 8.0),
+          child: Text(
+            "Reviews",
+            textAlign: TextAlign.left,
+            style: TextStyle(
+              fontWeight: FontWeight.w600,
+              fontSize: 22,
+              letterSpacing: 0.27,
+              color: DesignCourseAppTheme.darkerText,
             ),
-          )
-        ],
-      ),
+          ),
+        ),
+        ReviewsListView(),
+      ],
     );
   }
 
