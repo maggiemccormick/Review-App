@@ -92,6 +92,7 @@ class ReviewsView extends StatelessWidget {
                 child: Stack(
                   children: <Widget>[
                     Container(
+                      padding: const EdgeInsets.only(bottom: 10),
                       child: Row(
                         // row for the review cards
                         children: <Widget>[
