@@ -1,6 +1,5 @@
 import 'package:Redlands_Strong/services/models.dart';
 import 'package:Redlands_Strong/shared/shared.dart';
-import 'package:Redlands_Strong/shared/themes/design_course_app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -128,7 +127,7 @@ class ReviewsView extends StatelessWidget {
                                                     fontWeight: FontWeight.w600,
                                                     fontSize: 16,
                                                     letterSpacing: 0.27,
-                                                    color: DesignCourseAppTheme.darkerText,
+                                                    color: AppTheme.darkerText,
                                                   ),
                                                 ),
                                                 Padding(
@@ -142,12 +141,12 @@ class ReviewsView extends StatelessWidget {
                                                           fontWeight: FontWeight.w200,
                                                           fontSize: 18,
                                                           letterSpacing: 0.27,
-                                                          color: DesignCourseAppTheme.grey,
+                                                          color: AppTheme.grey,
                                                         ),
                                                       ),
                                                       Icon(
                                                         Icons.star,
-                                                        color: DesignCourseAppTheme.nearlyBlue,
+                                                        color: AppTheme.nearlyBlue,
                                                         size: 20,
                                                       ),
                                                     ],
@@ -177,7 +176,7 @@ class ReviewsView extends StatelessWidget {
                                                         fontWeight: FontWeight.w200,
                                                         fontSize: 12,
                                                         letterSpacing: 0.27,
-                                                        color: DesignCourseAppTheme.grey,
+                                                        color: AppTheme.grey,
                                                       ),
                                                     ),
                                                     Text(
@@ -187,7 +186,7 @@ class ReviewsView extends StatelessWidget {
                                                         fontWeight: FontWeight.w200,
                                                         fontSize: 12,
                                                         letterSpacing: 0.27,
-                                                        color: DesignCourseAppTheme.grey,
+                                                        color: AppTheme.grey,
                                                       ),
                                                     ),
                                                   ],
@@ -212,7 +211,7 @@ class ReviewsView extends StatelessWidget {
                                                         fontWeight: FontWeight.w600,
                                                         fontSize: 18,
                                                         letterSpacing: 0.28,
-                                                        color: DesignCourseAppTheme.nearlyBlue,
+                                                        color: AppTheme.nearlyBlue,
                                                       ),
                                                     ),
                                                     Text(
@@ -222,7 +221,7 @@ class ReviewsView extends StatelessWidget {
                                                         fontWeight: FontWeight.w200,
                                                         fontSize: 12,
                                                         letterSpacing: 0.2,
-                                                        color: DesignCourseAppTheme.darkerText,
+                                                        color: AppTheme.darkerText,
                                                       ),
                                                     ),
                                                   ],
@@ -243,7 +242,7 @@ class ReviewsView extends StatelessWidget {
                                                     fontWeight: FontWeight.w600,
                                                     fontSize: 18,
                                                     letterSpacing: 0.27,
-                                                    color: DesignCourseAppTheme.nearlyBlue,
+                                                    color: AppTheme.nearlyBlue,
                                                   ),
                                                 ),
                                               ],
@@ -262,7 +261,7 @@ class ReviewsView extends StatelessWidget {
                                                     fontWeight: FontWeight.w600,
                                                     fontSize: 18,
                                                     letterSpacing: 0.27,
-                                                    color: DesignCourseAppTheme.nearlyBlue,
+                                                    color: AppTheme.nearlyBlue,
                                                   ),
                                                 ),
                                               ],
@@ -281,7 +280,7 @@ class ReviewsView extends StatelessWidget {
                                                     fontWeight: FontWeight.w600,
                                                     fontSize: 18,
                                                     letterSpacing: 0.27,
-                                                    color: DesignCourseAppTheme.nearlyBlue,
+                                                    color: AppTheme.nearlyBlue,
                                                   ),
                                                 ),
                                               ],

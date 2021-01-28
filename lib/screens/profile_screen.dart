@@ -201,7 +201,7 @@ class ProfileScreenState extends State<ProfileScreen> with TickerProviderStateMi
               fontWeight: FontWeight.w600,
               fontSize: 22,
               letterSpacing: 0.27,
-              color: DesignCourseAppTheme.darkerText,
+              color: AppTheme.darkerText,
             ),
           ),
         ),
