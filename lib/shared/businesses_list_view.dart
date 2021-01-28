@@ -1,6 +1,6 @@
 import 'package:Redlands_Strong/main.dart';
 import 'package:Redlands_Strong/services/models.dart';
-import 'package:Redlands_Strong/shared/themes/design_course_app_theme.dart';
+import 'package:Redlands_Strong/shared/shared.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -135,7 +135,7 @@ class BusinessView extends StatelessWidget {
                                                 fontWeight: FontWeight.w600,
                                                 fontSize: 16,
                                                 letterSpacing: 0.27,
-                                                color: DesignCourseAppTheme.darkerText,
+                                                color: AppTheme.darkerText,
                                               ),
                                             ),
                                           ),
@@ -155,7 +155,7 @@ class BusinessView extends StatelessWidget {
                                                     fontWeight: FontWeight.w200,
                                                     fontSize: 12,
                                                     letterSpacing: 0.27,
-                                                    color: DesignCourseAppTheme.grey,
+                                                    color: AppTheme.grey,
                                                   ),
                                                 ),
                                                 Container(
@@ -168,12 +168,12 @@ class BusinessView extends StatelessWidget {
                                                           fontWeight: FontWeight.w200,
                                                           fontSize: 18,
                                                           letterSpacing: 0.27,
-                                                          color: DesignCourseAppTheme.grey,
+                                                          color: AppTheme.grey,
                                                         ),
                                                       ),
                                                       Icon(
                                                         Icons.star,
-                                                        color: DesignCourseAppTheme.nearlyBlue,
+                                                        color: AppTheme.nearlyBlue,
                                                         size: 20,
                                                       ),
                                                     ],
@@ -195,7 +195,7 @@ class BusinessView extends StatelessWidget {
                                                     fontWeight: FontWeight.w600,
                                                     fontSize: 18,
                                                     letterSpacing: 0.27,
-                                                    color: DesignCourseAppTheme.nearlyBlue,
+                                                    color: AppTheme.nearlyBlue,
                                                   ),
                                                 ),
                                                 Container(
@@ -203,7 +203,7 @@ class BusinessView extends StatelessWidget {
                                                     padding: const EdgeInsets.all(4.0),
                                                     child: Icon(
                                                       Icons.favorite,
-                                                      color: DesignCourseAppTheme.nearlyBlue,
+                                                      color: AppTheme.nearlyBlue,
                                                     ),
                                                   ),
                                                 )
