@@ -15,7 +15,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   List<TabIconData> tabIconsList = TabIconData.tabIconsList;
 
   Widget tabBody = Container(
-    color: ReviewAppTheme.background,
+    color: AppTheme.background,
   );
 
   @override
@@ -40,7 +40,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: ReviewAppTheme.background,
+      color: AppTheme.background,
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: FutureBuilder<bool>(

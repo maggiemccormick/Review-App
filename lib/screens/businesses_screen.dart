@@ -26,7 +26,7 @@ class _ReviewsScreenState extends State<ReviewsScreen> with TickerProviderStateM
   List<TabIconData> tabIconsList = TabIconData.tabIconsList;
 
   Widget tabBody = Container(
-    color: DesignCourseAppTheme.dismissibleBackground,
+    color: AppTheme.dismissibleBackground,
   );
 
   @override
@@ -51,7 +51,7 @@ class _ReviewsScreenState extends State<ReviewsScreen> with TickerProviderStateM
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: DesignCourseAppTheme.nearlyWhite,
+      color: AppTheme.nearlyWhite,
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: Column(
@@ -101,7 +101,7 @@ class _ReviewsScreenState extends State<ReviewsScreen> with TickerProviderStateM
                     fontWeight: FontWeight.w400,
                     fontSize: 14,
                     letterSpacing: 0.2,
-                    color: DesignCourseAppTheme.grey,
+                    color: AppTheme.grey,
                   ),
                 ),
                 Text(
@@ -111,7 +111,7 @@ class _ReviewsScreenState extends State<ReviewsScreen> with TickerProviderStateM
                     fontWeight: FontWeight.bold,
                     fontSize: 22,
                     letterSpacing: 0.27,
-                    color: DesignCourseAppTheme.darkerText,
+                    color: AppTheme.darkerText,
                   ),
                 ),
               ],
@@ -160,7 +160,7 @@ class _ReviewsScreenState extends State<ReviewsScreen> with TickerProviderStateM
                             fontFamily: 'WorkSans',
                             fontWeight: FontWeight.bold,
                             fontSize: 16,
-                            color: DesignCourseAppTheme.nearlyBlue,
+                            color: AppTheme.nearlyBlue,
                           ),
                           keyboardType: TextInputType.text,
                           decoration: InputDecoration(
@@ -216,7 +216,7 @@ class _ReviewsScreenState extends State<ReviewsScreen> with TickerProviderStateM
               fontWeight: FontWeight.w600,
               fontSize: 22,
               letterSpacing: 0.27,
-              color: DesignCourseAppTheme.darkerText,
+              color: AppTheme.darkerText,
             ),
           ),
         ),

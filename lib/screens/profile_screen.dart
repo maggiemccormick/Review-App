@@ -201,7 +201,7 @@ class ProfileScreenState extends State<ProfileScreen> with TickerProviderStateMi
               fontWeight: FontWeight.w600,
               fontSize: 22,
               letterSpacing: 0.27,
-              color: DesignCourseAppTheme.darkerText,
+              color: AppTheme.darkerText,
             ),
           ),
         ),
@@ -268,7 +268,7 @@ class ProfileScreenState extends State<ProfileScreen> with TickerProviderStateMi
 
   Widget loggedOutUI() {
     return Container(
-      color: DesignCourseAppTheme.nearlyWhite,
+      color: AppTheme.nearlyWhite,
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: Column(
@@ -317,7 +317,7 @@ class ProfileScreenState extends State<ProfileScreen> with TickerProviderStateMi
                     fontWeight: FontWeight.bold,
                     fontSize: 22,
                     letterSpacing: 0.27,
-                    color: DesignCourseAppTheme.darkerText,
+                    color: AppTheme.darkerText,
                   ),
                 ),
               ],
