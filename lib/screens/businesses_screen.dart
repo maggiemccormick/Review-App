@@ -26,7 +26,7 @@ class _ReviewsScreenState extends State<ReviewsScreen> with TickerProviderStateM
   List<TabIconData> tabIconsList = TabIconData.tabIconsList;
 
   Widget tabBody = Container(
-    color: AppTheme.dismissibleBackground,
+    color: AppTheme.background,
   );
 
   @override
@@ -51,7 +51,7 @@ class _ReviewsScreenState extends State<ReviewsScreen> with TickerProviderStateM
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: AppTheme.nearlyWhite,
+      color: AppTheme.lightestBlue,
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: Column(
