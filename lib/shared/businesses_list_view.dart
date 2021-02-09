@@ -113,8 +113,21 @@ class BusinessView extends StatelessWidget {
                           Expanded(
                             child: Container(
                               decoration: BoxDecoration(
-                                color: HexColor('#F8FAFB'),
+                                color: AppTheme.lightestOrange,
                                 borderRadius: const BorderRadius.all(Radius.circular(16.0)),
+                                gradient: new LinearGradient(colors: [AppTheme.lightOrange, AppTheme.lightPink],
+                                        begin: Alignment.centerLeft, end: Alignment.centerRight, tileMode: TileMode.clamp),
+                                boxShadow: [  // for some reason this looks really ugly in the rows with mult businesses?
+                                  BoxShadow(
+                                    color: Colors.grey.withOpacity(0.5),
+                                    spreadRadius: 3, //spread radius
+                                    blurRadius: 5, // blur radius
+                                    offset: Offset(0, 2), // changes position of shadow
+                                    //first parameter of offset is left-right
+                                    //second parameter is top to down
+                                  //you can set more BoxShadow() here
+                                  ),
+                                ],
                               ),
                               child: Row(
                                 children: <Widget>[

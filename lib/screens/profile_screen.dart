@@ -76,7 +76,7 @@ class ProfileScreenState extends State<ProfileScreen> with TickerProviderStateMi
           Container(
             height: 200.0,
             decoration: BoxDecoration(
-              gradient: LinearGradient(colors: [AppTheme.nearlyBlue, AppTheme.nearlyDarkBlue]),
+              gradient: LinearGradient(colors: [AppTheme.lighterOrange, AppTheme.lighterPink]),
             ),
           ),
           ListView.builder(
@@ -158,7 +158,7 @@ class ProfileScreenState extends State<ProfileScreen> with TickerProviderStateMi
                               textAlign: TextAlign.center,
                               style: TextStyle(fontWeight: FontWeight.bold),
                             ),
-                            subtitle: Text("Favourites".toUpperCase(),
+                            subtitle: Text("Favorites".toUpperCase(),
                                 textAlign: TextAlign.center, style: AppTheme.body2),
                           ),
                         ),
@@ -215,7 +215,7 @@ class ProfileScreenState extends State<ProfileScreen> with TickerProviderStateMi
         height: 250,
         color: Colors.transparent,
         padding: EdgeInsets.only(left: 20.0, top: 20.0, bottom: 10.0),
-        child: Text("Favourite locations", style: AppTheme.title));
+        child: Text("Favorite Locations", style: AppTheme.title));
   }
 
   Container _buildFriendsSection(BuildContext context) {
