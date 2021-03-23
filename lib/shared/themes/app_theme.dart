@@ -23,6 +23,27 @@ class AppTheme {
   static const Color spacer = Color(0xFFF2F2F2);
   static const String fontName = 'WorkSans';
 
+  // MY COLORS
+  static const Color lightestOrange = Color(0xFFFFF4CC);
+  static const Color lighterOrange = Color(0xFFFFE699);
+  static const Color lightOrange = Color(0xFFFFD466);
+  static const Color medOrange = Color(0xFFFFA500);
+
+  static const Color lightestBlue = Color(0xFFD8FCFE);
+  static const Color lighterBlue = Color(0xFFB2F5FE);
+  static const Color lightBlue = Color(0xFF8BE8FE);
+  static const Color medBlue = Color(0xFF3FC0FC);
+
+  static const Color lightestRed = Color(0xFFFFEBD9);
+  static const Color lighterRed = Color(0xFFFFD2B4);
+  static const Color lightRed = Color(0xFFFF9672);
+  static const Color medRed = Color(0xFFFF6644);
+
+  static const Color lightestPink = Color(0xFFFFEBE3);
+  static const Color lighterPink = Color(0xFFFFD3C7);
+  static const Color lightPink = Color(0xFFFF9A97);
+  static const Color medPink = Color(0xFFFF757E);
+
   static const TextTheme textTheme = TextTheme(
     headline4: display1,
     headline5: headline,
